@@ -66,6 +66,7 @@ class OpenfoamOrg(Package):
     license("GPL-3.0-or-later")
 
     version("develop", branch="master")
+    version("12", sha256="e59fad54c62e64f1bb89dbaebe5f99a76dc0a6a91d9aad86042a7c4cef6d0744")
     version("11", sha256="ebc0f86ead699abba61290ba8aac5b730aa93256e675d1d93a5d5f116d51e0c0")
     version("10", sha256="59d712ba798ca44b989b6ac50bcb7c534eeccb82bcf961e10ec19fc8d84000cf")
     version("9", sha256="0c48fb56e2fbb4dd534112811364d3b2dc12106e670a6486b361e4f864b435ee")
@@ -103,8 +104,10 @@ class OpenfoamOrg(Package):
     depends_on("zlib-api")
     depends_on("flex")
     depends_on("cmake", type="build")
-    # The setSet tool (removed in version 10) depends on readline
-    depends_on("readline", when="@:9")
+    depends_on("json-c")
+    depends_on("libyaml")
+    # Still require libreadline.so.8 as of openfoam-org@12
+    depends_on("readline")
 
     # Require scotch with ptscotch - corresponds to standard OpenFOAM setup
     depends_on("scotch~metis+mpi~int64", when="+scotch~int64")
