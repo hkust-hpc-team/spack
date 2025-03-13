@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+import os.path as osp
 from spack.package import *
 
 
@@ -22,8 +23,10 @@ class PerlXmlParser(PerlPackage):
 
     def configure_args(self):
         args = []
-
-        p = self.spec["expat"].prefix.lib
+        if osp.isdir(self.spec["expat"].prefix.lib64):
+            p = self.spec["expat"].prefix.lib64
+        else:
+            p = self.spec["expat"].prefix.lib
         args.append(f"EXPATLIBPATH={p}")
         p = self.spec["expat"].prefix.include
         args.append(f"EXPATINCPATH={p}")
