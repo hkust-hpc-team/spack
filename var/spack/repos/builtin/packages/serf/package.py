@@ -28,6 +28,7 @@ class Serf(SConsPackage):
 
     depends_on("apr")
     depends_on("apr-util")
+    depends_on("expat")
     depends_on("openssl")
     depends_on("python+pythoncmd", type="build")
     depends_on("scons@2.3.0:", type="build")
