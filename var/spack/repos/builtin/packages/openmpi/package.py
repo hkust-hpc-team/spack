@@ -1253,6 +1253,16 @@ with '-Wl,-commons,use_dylibs' and without
                 else:
                     copy(script_stub, exe)
 
+    @run_before("configure", when="@4:4")
+    def patch_oshmem_oneapi(self):
+        if self.spec.satisfies("@4:4%oneapi@2023:"):
+            filter_file(
+                "void *mca_sshmem_base_start_address = UINTPTR_MAX;",
+                "void *mca_sshmem_base_start_address = (void *) UINTPTR_MAX;",
+                "oshmem/mca/sshmem/base/sshmem_base_open.c",
+                string=True,
+            )
+
     @run_after("install")
     def setup_install_tests(self):
         """
