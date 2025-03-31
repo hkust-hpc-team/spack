@@ -16,7 +16,10 @@ class RdmaCore(CMakePackage):
     keep_werror = "all"
 
     license("GPL-2.0-only OR BSD-2-Clause")
-
+    version("56.0", sha256="d62923fdb7c4f41c16e05f3ac135f91a3e0ef01e9ab26feb9e5a2b1d4646153d")
+    version("55.0", sha256="6f8b97267807cdae54845f542ee3d75de80fdc24fe2632f5db1573ecef132d0f")
+    version("54.0", sha256="a54a4970d2eeadeedeb28e99b48a41f392891cc5b81a890d0d4b1f9b39692f60")
+    version("53.0", sha256="388d6bb148f2ccda5bc716df2c2ee925fb7903589a01da4db3149f307ebf1933")
     version("52.0", sha256="1f0ce5f2462c982b20d21156707076278807a7adf4d10e9142f3be4bec1b2b83")
     version("51.0", sha256="0a4a55b1351356c2750f26ec9010e8c7370402a13c95799cb8b447cf0134dd61")
     version("50.0", sha256="405b9dd551120da9d1b8944c5ad24ab1f478fb13caedf5bf0d47053a6d6e20cc")
