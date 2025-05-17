@@ -1,0 +1,24 @@
+--- a/scripts/site_scons/site_tools/gitversion.py	2024-10-11 12:15:23.000000000 +0800
++++ b/scripts/site_scons/site_tools/gitversion.py	2025-05-16 22:34:52.650958864 +0800
+@@ -146,16 +146,17 @@
+     cc = env['CC']
+     import ntpath
+     import os
+-    # get compiler exe file from full path
+-    # we donot need full path string in the version
+-    if os.path.exists(os.path.dirname(cc)):
+-        cc = ntpath.basename(cc)
+     cc_ver = env['CCVERSION']
+ 
+     # if clang, fetch aocc release version too
+     if 'clang' in cc:
+         cc_ver += '-' + GetAOCCVersion(cc)
+ 
++    # get compiler exe file from full path
++    # we do not need full path string in the version
++    if os.path.exists(os.path.dirname(cc)):
++        cc = ntpath.basename(cc)
++
+     import platform
+     platform = platform.platform()
+     sys_details = '%s-%s-%s' % (cc, cc_ver, str(platform))

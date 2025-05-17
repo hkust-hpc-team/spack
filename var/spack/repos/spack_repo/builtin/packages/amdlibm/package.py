@@ -49,7 +49,7 @@ class Amdlibm(SConsPackage):
     depends_on("c", type="build")  # generated
     depends_on("cxx", type="build")  # generated
 
-    depends_on("python@3.6.1:", type=("build", "run"))
+    depends_on("python@3.6.1:", type=("build"))
     depends_on("scons@3.1.2:", type=("build"))
     depends_on("mpfr", type=("link"))
     for vers in ["4.1", "4.2", "5.0"]:
@@ -62,6 +62,7 @@ class Amdlibm(SConsPackage):
     # the newly introduced 'SPACK_MANAGED_DIRS'
     # build environment variable.
     patch("libm-ose-SconsSpack.patch", when="@3.1:4.2")
+    patch("0004-libm-ose-SconsSpack-fix-version.patch", when="@4:5")
 
     conflicts("%gcc@:9.1.0", msg="Minimum supported GCC version is 9.2.0")
     conflicts("%clang@:9.0", msg="Minimum supported Clang version is 9")
