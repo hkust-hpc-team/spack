@@ -17,7 +17,17 @@ class Libpng(CMakePackage):
 
     license("Libpng")
 
+    version("1.6.48", sha256="46fd06ff37db1db64c0dc288d78a3f5efd23ad9ac41561193f983e20937ece03")
+    version("1.6.47", sha256="b213cb381fbb1175327bd708a77aab708a05adde7b471bc267bd15ac99893631")
+    version("1.6.46", sha256="f3aa8b7003998ab92a4e9906c18d19853e999f9d3bca9bd1668f54fa81707cb1")
+    version("1.6.45", sha256="926485350139ffb51ef69760db35f78846c805fef3d59bfdcb2fba704663f370")
+    version("1.6.44", sha256="60c4da1d5b7f0aa8d158da48e8f8afa9773c1c8baa5d21974df61f1886b8ce8e")
+    version("1.6.43", sha256="6a5ca0652392a2d7c9db2ae5b40210843c0bbc081cbd410825ab00cc59f14a6c")
+    version("1.6.42", sha256="c919dbc11f4c03b05aba3f8884d8eb7adfe3572ad228af972bb60057bdb48450")
+    version("1.6.41", sha256="d6a49a7a4abca7e44f72542030e53319c081fea508daccf4ecc7c6d9958d190f")
+    version("1.6.40", sha256="535b479b2467ff231a3ec6d92a525906fb8ef27978be4f66dbe05d3f3a01b3a1")
     version("1.6.39", sha256="1f4696ce70b4ee5f85f1e1623dc1229b210029fa4b7aee573df3e2ba7b036937")
+    version("1.6.38", sha256="b3683e8b8111ebf6f1ac004ebb6b0c975cd310ec469d98364388e9cedbfa68be")
     version("1.6.37", sha256="505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca")
     # From http://www.libpng.org/pub/png/libpng.html (2019-04-15)
     #     libpng versions 1.6.36 and earlier have a use-after-free bug in the
