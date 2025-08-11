@@ -16,6 +16,16 @@ class MpasModel(MakefilePackage):
     url = "https://github.com/MPAS-Dev/MPAS-Model/archive/v7.0.tar.gz"
     maintainers("t-brown")
 
+    version("8.3.1", sha256="fef53509faeeb0d5e455781708f2fdde614710dc67ee5fae3a96e89e371cab8d")
+    version("8.3.0", sha256="03ed75262688b0718fe6bf047bfb9037229def052ffdaa7b052f48acb8c8b5e1")
+    version("8.2.3", sha256="bb3b02c30abffe9ff0318165b25724e6855fb69076fd89243f06a24e11912ee1")
+    version("8.2.2", sha256="9676d8ffaf5bc7ec73d55651eff563ec45242ef4cc4659c9f51c8df27718b00f")
+    version("8.2.1", sha256="3d1aad2e71f108cd427d8ec44b3505b3e9d0a784e8621f58da16c2f1087c88a4")
+    version("8.2.0", sha256="16f79881c3a1a78329ea5534b7fcbe97ce98cc2b638e0dece4146dff2f19b9df")
+    version("8.1.0", sha256="062766db8800170d0cb8265e6dbe6c72df4c3caf566a938d179d8cfddc44dc4a")
+    version("8.0.2", sha256="f5c0f7c9b68f782f3a7e2f6b25b157977433e02994752b3ab8e1d8e74aa5bbb9")
+    version("8.0.1", sha256="46f855f4675ee1015b0634d6277057e1fabb9eb7ab0b4b9796ab7d0c449c9a0d")
+    version("8.0.0", sha256="aa7e7964328da8cbcc4fa471d3b112af58bdc72a96a9f688441ee034a0de479c")
     version("7.3", sha256="a6a9570911b47aa3607036c1ab5a9ae770f9f3a85cea2710f08bb3b35c08facf")
     version("7.2", sha256="3158c22e4a33ae00ce20b65f6ad189c0b7839587dee124d685b02f9df9cf27a7")
     version("7.1", sha256="9b5c181b7d0163ae33d24d7a79ede6990495134b58cf4500ba5c8c94192102bc")
