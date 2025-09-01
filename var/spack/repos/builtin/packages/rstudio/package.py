@@ -110,7 +110,7 @@ class Rstudio(CMakePackage):
         ]:
             depends_on(run_dep, type="run")
 
-    with when("@2023.12:2023.11"):
+    with when("@2020.01:2023.11"):
         depends_on(
             "boost@1.69:1.83 +atomic+chrono+date_time+filesystem+iostreams+program_options"
             "+random+regex+signals+system+thread +pic"
