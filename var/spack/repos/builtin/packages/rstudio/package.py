@@ -16,7 +16,9 @@ class Rstudio(CMakePackage):
 
     maintainers("dorton21", "kftse-ust-hk", "kftsehk")
     version("main", git=git, branch="main")
-    version("2024.09.1", git=git, tag="v2024.09.1+394", preferred=True)
+    version("2025.05.1", git=git, tag="v2025.05.1+513")
+    version("2024.12.1", git=git, tag="v2024.12.1+563", preferred=True)
+    version("2024.09.1", git=git, tag="v2024.09.1+394")
     version("2024.04.2", git=git, tag="v2024.04.2+764")
     version("2023.12.1", git=git, tag="v2023.12.1+402")
     version("2023.09.0", git=git, tag="v2023.09.0+463")
@@ -75,10 +77,6 @@ class Rstudio(CMakePackage):
 
     with when("@2020:"):
         depends_on("r@4:", type=("build", "run"))
-        depends_on(
-            "boost@1.69: +atomic+chrono+date_time+filesystem+iostreams+program_options"
-            "+random+regex+signals+system+thread +pic"
-        )
         depends_on("soci@4+sqlite+boost+static cxxstd=11 cppflags='-fpic'")
         depends_on("uuid")
         depends_on("fontconfig")
@@ -111,6 +109,24 @@ class Rstudio(CMakePackage):
             "libxdamage",
         ]:
             depends_on(run_dep, type="run")
+
+    with when("@2020.01:2023.11"):
+        depends_on(
+            "boost@1.69:1.83 +atomic+chrono+date_time+filesystem+iostreams+program_options"
+            "+random+regex+signals+system+thread +pic"
+        )
+    # https://github.com/rstudio/rstudio/issues/13577
+    with when("@2023.12:2025.04"):
+        depends_on(
+            "boost@1.83 +atomic+chrono+date_time+filesystem+iostreams+program_options"
+            "+random+regex+signals+system+thread +pic"
+        )
+    # https://github.com/rstudio/rstudio/pull/15625
+    with when("@2025.05:"):
+        depends_on(
+            "boost@1.83: +atomic+chrono+date_time+filesystem+iostreams+program_options"
+            "+random+regex+signals+system+thread +pic"
+        )
 
     def cmake_args(self):
         args = [
