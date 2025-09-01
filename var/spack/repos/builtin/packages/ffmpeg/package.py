@@ -104,6 +104,7 @@ class Ffmpeg(AutotoolsPackage):
     depends_on("pkgconfig", type="build")
 
     depends_on("aom", when="+libaom")
+    depends_on("aom@2:", when="@7.1: +libaom")
     depends_on("bzip2", when="+bzlib")
     depends_on("fontconfig", when="+drawtext")
     depends_on("freetype", when="+drawtext")
