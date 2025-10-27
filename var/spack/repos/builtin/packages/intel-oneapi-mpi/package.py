@@ -156,6 +156,7 @@ class IntelOneapiMpi(IntelOneApiLibraryPackage):
         "external-libfabric", default=False, description="Enable external libfabric dependency"
     )
     depends_on("libfabric", when="+external-libfabric", type=("link", "run"))
+    depends_on("pmix", when="@2021:", type=("link", "run"))
 
     provides("mpi@:3.1")
     conflicts("+generic-names +classic-names")
