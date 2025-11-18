@@ -80,6 +80,8 @@ class Rstudio(CMakePackage):
         depends_on("soci@4+sqlite+boost+static cxxstd=11 cppflags='-fpic'")
         depends_on("uuid")
         depends_on("fontconfig")
+        depends_on("node-js", type=("build", "run"))
+        depends_on("yarn", type="build")
 
         # ? Shall we list all required deps strictly?
         # If user would like to use system deps, it will require `spack external find`
