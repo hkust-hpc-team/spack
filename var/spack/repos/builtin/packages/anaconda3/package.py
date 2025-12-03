@@ -46,7 +46,7 @@ class Anaconda3(Package):
                     extension="json",
                     expand=False,
                     url="file://{0}".format(VERSION_FILE),
-                    checksum="95c2a6cbc0ffba9823be9674f96e5e775f057f0e39d5637a8e0227524f43f0d7",
+                    checksum="a96023510cf4e62204ab10dbfcfe80addf8a84f16c95d25a4b7d517356070659",
                 )
                 # * Hack: Workaround for platform-specific installer
                 # Create a resource for each platform-specific installer
