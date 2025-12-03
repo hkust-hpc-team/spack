@@ -42,7 +42,7 @@ def generate_versions_json():
     versions = {}
     with open(input_file, "r", encoding="utf-8") as file:
         for n, line in enumerate(file):
-            if line.strip().startswith("#") or not line.strip():
+            if not re.match("^Anaconda3-[0-9]+", line.strip()):
                 continue
             try:
                 platform, arch, version, installer_name, sha256 = re_match_line(line)
