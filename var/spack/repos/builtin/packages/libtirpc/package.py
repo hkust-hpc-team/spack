@@ -53,3 +53,16 @@ class Libtirpc(AutotoolsPackage):
         if self.spec.satisfies("@1.3.3 platform=darwin"):
             return ["--disable-gssapi"]
         return []
+
+    @run_after("install")
+    def softlink_includes(self):
+        """Libtirpc installs its headers in a subdirectory of include.
+        Softlink them to the include directory so that packages that
+        expect to find rpc/rpc.h in include can find it."""
+
+        for header in os.listdir(self.prefix.include.tirpc):
+            src = join_path(self.prefix.include.tirpc, header)
+            dst = join_path(self.prefix.include, header)
+            if not os.path.exists(dst):
+                os.symlink(src, dst)
+
