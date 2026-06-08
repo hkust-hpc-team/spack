@@ -19,6 +19,9 @@ spack-db.*
 *.in.log
 *.out.log
 
+# ignore the apptainer image files
+*.sif
+
 ###########################
 # Python-specific ignores #
 ###########################
