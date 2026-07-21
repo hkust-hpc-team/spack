@@ -1,6 +1,7 @@
 # Copyright Spack Project Developers. See COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
+import os
 import re
 
 import spack.build_systems.autotools
@@ -166,7 +167,17 @@ class AutotoolsBuilder(spack.build_systems.autotools.AutotoolsBuilder, SetupEnvi
     def configure_args(self):
         args = []
         if "+openssl" in self.spec:
-            args.append("--with-openssl-dir=%s" % self.spec["openssl"].prefix)
+            openssl_prefix = self.spec["openssl"].prefix
+            openssl_libdir = join_path(openssl_prefix, "lib64")
+            if not os.path.isdir(openssl_libdir):
+                openssl_libdir = join_path(openssl_prefix, "lib")
+            args.extend(
+                [
+                    "--with-openssl-dir=%s" % openssl_prefix,
+                    "--with-openssl-include=%s" % join_path(openssl_prefix, "include"),
+                    "--with-openssl-lib=%s" % openssl_libdir,
+                ]
+            )
         if "+readline" in self.spec:
             args.append("--with-readline-dir=%s" % self.spec["readline"].prefix)
         if "^tk" in self.spec:
@@ -195,20 +206,29 @@ class AutotoolsBuilder(spack.build_systems.autotools.AutotoolsBuilder, SetupEnvi
                 "rubygems",
                 "ssl_certs",
             )
+            mkdirp(rubygems_certs_path)
             install(rubygems_updated_cert_path, rubygems_certs_path)
 
-        rbconfig = find(self.prefix, "rbconfig.rb")[0]
-        filter_file(
-            r'^(\s*CONFIG\["CXX"\]\s*=\s*).*', r'\1"{0}"'.format(self.pkg.compiler.cxx), rbconfig
-        )
-        filter_file(
-            r'^(\s*CONFIG\["CC"\]\s*=\s*).*', r'\1"{0}"'.format(self.pkg.compiler.cc), rbconfig
-        )
-        filter_file(
-            r'^(\s*CONFIG\["MJIT_CC"\]\s*=\s*).*',
-            r'\1"{0}"'.format(self.pkg.compiler.cc),
-            rbconfig,
-        )
+        rbconfigs = find(self.prefix, "rbconfig.rb", recursive=True)
+        if rbconfigs:
+            rbconfig = rbconfigs[0]
+            filter_file(
+                r'^(\s*CONFIG\["CXX"\]\s*=\s*).*',
+                r'\1"{0}"'.format(self.pkg.compiler.cxx),
+                rbconfig,
+            )
+            filter_file(
+                r'^(\s*CONFIG\["CC"\]\s*=\s*).*',
+                r'\1"{0}"'.format(self.pkg.compiler.cc),
+                rbconfig,
+            )
+            filter_file(
+                r'^(\s*CONFIG\["MJIT_CC"\]\s*=\s*).*',
+                r'\1"{0}"'.format(self.pkg.compiler.cc),
+                rbconfig,
+            )
+        else:
+            tty.warn("Ruby rbconfig.rb was not installed; skipping compiler metadata rewrite")
 
 
 class NMakeBuilder(spack.build_systems.nmake.NMakeBuilder, SetupEnvironment):

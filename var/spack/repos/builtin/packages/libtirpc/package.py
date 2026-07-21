@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+import os
+
 from spack.package import *
 
 
@@ -65,4 +67,3 @@ class Libtirpc(AutotoolsPackage):
             dst = join_path(self.prefix.include, header)
             if not os.path.exists(dst):
                 os.symlink(src, dst)
-
