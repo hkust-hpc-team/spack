@@ -180,10 +180,22 @@ class Matlab(Package):
                     env.prepend_path("LD_LIBRARY_PATH", spec.prefix.lib64)
 
     def install(self, spec, prefix):
+        installation_key = spec.variants["key"].value
+        if installation_key == "<installation-key-here>":
+            key_file = os.path.join(self.global_license_dir, "matlab", "file_installation_key.txt")
+            if not os.path.isfile(key_file):
+                raise InstallError(
+                    "MATLAB file installation key is missing; expected " + key_file
+                )
+            with open(key_file, encoding="utf-8") as key_stream:
+                installation_key = key_stream.read().strip()
+            if not installation_key:
+                raise InstallError("MATLAB file installation key is empty: " + key_file)
+
         config = {
             "destinationFolder": prefix,
             "mode": spec.variants["mode"].value,
-            "fileInstallationKey": spec.variants["key"].value,
+            "fileInstallationKey": installation_key,
             "licensePath": self.global_license_file,
             "agreeToLicense": "yes",
         }
