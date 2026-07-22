@@ -181,7 +181,10 @@ class Matlab(Package):
 
     def install(self, spec, prefix):
         installation_key = spec.variants["key"].value
-        if installation_key == "<installation-key-here>":
+        key_digits = installation_key.replace("-", "")
+        if installation_key == "<installation-key-here>" or (
+            len(key_digits) == 90 and key_digits == "0" * 90
+        ):
             key_file = os.path.join(self.global_license_dir, "matlab", "file_installation_key.txt")
             if not os.path.isfile(key_file):
                 raise InstallError(
